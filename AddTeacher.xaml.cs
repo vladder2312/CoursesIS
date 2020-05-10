@@ -8,9 +8,7 @@ using System.Windows;
 
 namespace Courses
 {
-    /// <summary>
-    /// Логика взаимодействия для AddTeacher.xaml
-    /// </summary>
+    /// <summary> Логика взаимодействия для AddTeacher.xaml </summary>
     public partial class AddTeacher : Window
     {
         public AddTeacher()
@@ -25,6 +23,7 @@ namespace Courses
             foreach (DataRow category in MainWindow.ExecuteQuery(Query.CATEGORIES())) CategoryCB.Items.Add(category[0].ToString());
         }
 
+        /// <summary> Обработка нажатия на "Добавить" </summary>
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             int categoryId;
@@ -47,6 +46,7 @@ namespace Courses
             } catch (Exception)
             {
                 OutputLabel.Content = "Ошибка при добавлении";
+                return;
             }
             OutputLabel.Content = "Успешно добавлен!";
         }
