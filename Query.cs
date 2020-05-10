@@ -13,6 +13,11 @@ namespace Courses
             return "Select Fio From Teachers";
         }
 
+        public static string CATEGORIES()
+        {
+            return "Select Name From Categories";
+        }
+
         public static string SUBJECTS()
         {
             return "Select Name From Subjects";
@@ -95,13 +100,19 @@ namespace Courses
         public static string INSERT_PRICES_COURSES(int IdPrice, int IdCourse, string Date)
         {
             return "Insert into DocPricesCourses(Id_price, Id_course, Date) Values(" +
-                    + IdPrice + ", " + IdCourse + ", '" + Date + "')";
+                    IdPrice + ", " + IdCourse + ", '" + Date + "')";
         }
 
         public static string INSERT_TEACHERS_COURSES(int IdTeacher, int IdCourse, string StartDate, string EndDate)
         {
             return "Insert into DocTeachersCourses(Id_teacher, Id_course, StartDate, EndDate) Values(" +
-                    + IdTeacher + ", " + IdCourse + ", '" + StartDate + "', '" + EndDate + "')";
+                   IdTeacher + ", " + IdCourse + ", '" + StartDate + "', '" + EndDate + "')";
+        }
+
+        public static string INSERT_TEACHERS(int IdCategory, string Fio, string Birth, string Gender, string Education)
+        {
+            return "Insert into Teachers(Id_category, Fio, BirthDate, Gender, Education) Values(" +
+                   IdCategory + ", N'" + Fio + "', '" + Birth + "', N'" + Gender + "', N'" + Education + "')";
         }
     }
 }
