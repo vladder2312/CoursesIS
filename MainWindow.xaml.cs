@@ -50,7 +50,7 @@ namespace Courses
         /// <summary> Обработка нажатия на Тестирование->Результаты </summary>
         private void ShowResultsOfTests_Click(object sender, RoutedEventArgs e)
         {
-
+            Table.ItemsSource = TestResults.Transform(ExecuteQuery(Query.TEST_RESULTS()));
         }
 
         /// <summary> Обработка нажатия на "Прайс-лист организации" </summary>

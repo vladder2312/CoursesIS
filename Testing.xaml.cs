@@ -156,7 +156,7 @@ namespace Courses
         /// <summary> Сохранение результатов теста в БД </summary>
         private void SaveResults()
         {
-
+            MainWindow.ExecuteQuery(Query.INSERT_RESULTS(TestCB.Text, Convert.ToInt32(Answers.Average())));
         }
 
         /// <summary> Обработка нажатия на "Закрыть" </summary>

@@ -114,5 +114,26 @@ namespace Courses
             return "Insert into Teachers(Id_category, Fio, BirthDate, Gender, Education) Values(" +
                    IdCategory + ", N'" + Fio + "', '" + Birth + "', N'" + Gender + "', N'" + Education + "')";
         }
+
+        public static string INSERT_RESULTS(string test, int points)
+        {
+            return "Insert into TestResults(Id_test, Points) Values(" +
+                MainWindow.ExecuteQuery(ID_TEST(test))[0][0]+", "+points+")";
+        }
+
+        public static string ID_TEST(string name)
+        {
+            return "Select Id From Tests Where Name = N'" + name + "'";
+        }
+
+        public static string TEST_RESULTS()
+        {
+            return "Select Students.Fio, Subjects.Name, Tests.Name, TestResults.Points From Students " +
+                   "Inner Join Requests on Students.Id_request = Requests.Id " +
+                   "Inner Join Courses on Requests.Id_course = Courses.Id " +
+                   "Inner Join Subjects on Courses.Id_subject = Subjects.Id " +
+                   "Inner Join Tests on Subjects.Id = Tests.Id_subject " +
+                   "Inner Join TestResults on Tests.Id = TestResults.Id_test";
+        }
     }
 }
