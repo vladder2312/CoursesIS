@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Courses"
         mc:Ignorable="d"
-        Title="AddCourse" Height="360" Width="310" MinWidth="310" MinHeight="340">
+        Title="AddCourse" Height="373" Width="310" MinWidth="310" MinHeight="340">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -32,7 +32,7 @@
             <TextBox Margin="0,190,0,0" VerticalAlignment="Top" TextWrapping="Wrap" Text="0" Height="23" Name="AmmountTB"/>
             <ComboBox Margin="0,221,0,0" VerticalAlignment="Top" Height="23" Name="PriceCB"/>
         </Grid>
-        <Button Content="Добавить" Margin="10,0,10,30" Height="23" VerticalAlignment="Bottom" Name="Submit" Click="Submit_Click"/>
-        <Label Content="" Margin="10,304,10,0" Height="25" VerticalAlignment="Top" Name="errMessage"/>
+        <Button Content="Добавить" Margin="10,0,10,46" Height="23" VerticalAlignment="Bottom" Name="Submit" Click="Submit_Click"/>
+        <Label Content="" Margin="10,0,10,10" Height="25" VerticalAlignment="Bottom" Name="errMessage"/>
     </Grid>
 </Window>

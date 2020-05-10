@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Courses"
         mc:Ignorable="d"
-        Title="Тестирование" Height="229" Width="370" MinWidth="340" MinHeight="199">
+        Title="Тестирование" Height="320" Width="500">
     <Grid>
-        <Grid Name="InitGrid">
+        <Grid Visibility="Visible" Name="InitGrid">
             <Grid Margin="10,10,250,72">
                 <Label Content="Курс" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <Label Content="Ученик" HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top"/>
@@ -18,7 +18,22 @@
                 <ComboBox HorizontalAlignment="Left" Margin="0,31,0,0" VerticalAlignment="Top" Width="210" Name="StudentCB"/>
                 <ComboBox HorizontalAlignment="Left" Margin="0,62,0,0" VerticalAlignment="Top" Width="210" Name="TestCB"/>
             </Grid>
-            <Button Content="Начать" Margin="80,125,80,0" VerticalAlignment="Top" Click="Start_Click"/>
+            <Button Content="Начать" Margin="80,125,0,0" VerticalAlignment="Top" Click="Start_Click" HorizontalAlignment="Left" Width="202"/>
+        </Grid>
+        <Grid Visibility="Hidden"  Name="TestGrid">
+            <TextBlock Margin="10,10,10,0" TextWrapping="Wrap" Text="Вопрос" VerticalAlignment="Top" Height="100" TextAlignment="Center" Background="LightGray" Name="QuestionBlock"/>
+            <Button Content="Ок" Margin="0,0,20,20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="150" Click="Ok_Click"/>
+            <Grid Margin="10,150,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="472">
+                <RadioButton Content="Вариант 1" HorizontalAlignment="Left" VerticalAlignment="Top" Name="Var1"/>
+                <RadioButton Content="Вариант 2" HorizontalAlignment="Left" Margin="0,35,0,0" VerticalAlignment="Top" Name="Var2"/>
+                <RadioButton Content="Вариант 3" HorizontalAlignment="Left" Margin="220,0,0,0" VerticalAlignment="Top" Name="Var3"/>
+                <RadioButton Content="Вариант 4" HorizontalAlignment="Left" Margin="220,35,0,0" VerticalAlignment="Top" Name="Var4"/>
+            </Grid>
+        </Grid>
+        <Grid Visibility="Hidden" Name="ResultsGrid">
+            <TextBlock Margin="10,40,10,0" TextWrapping="Wrap" Text="Результаты" Name="ResultsBox" Height="16" VerticalAlignment="Top"/>
+            <ListBox Margin="0,70,0,0" Height="155" VerticalAlignment="Top" Name="ResultList"/>
+            <Button Margin="196,230,196,0" Content="Закрыть" VerticalAlignment="Top" Click="Close_Click"/>
         </Grid>
     </Grid>
 </Window>
