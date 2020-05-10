@@ -32,7 +32,7 @@ namespace Courses
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
-            foreach (DataRow subject in MainWindow.Query("Select Name From Subjects")) CourseCB.Items.Add(subject[0]);
+            foreach (DataRow subject in MainWindow.ExecuteQuery(Query.SUBJECTS())) CourseCB.Items.Add(subject[0]);
         }
 
         /// <summary> Обработка изменения выбранного курса </summary>
@@ -42,14 +42,8 @@ namespace Courses
             TestCB.Items.Clear();
             StudentCB.Items.Clear();
 
-            foreach (DataRow student in MainWindow.Query("Select Fio From Students "                                 +
-                                                         "Inner Join Requests on Students.Id_request = Requests.Id " +
-                                                         "Inner Join Courses on Requests.Id_course = Courses.Id "    +
-                                                         "Inner Join Subjects on Courses.Id_subject = Subjects.Id "  +
-                                                         "Where Subjects.Name = N'"+course+"'"))                        StudentCB.Items.Add(student[0]);
-            foreach (DataRow test in MainWindow.Query("Select Tests.Name From Tests "                          +
-                                                      "Inner Join Subjects on Tests.Id_subject = Subjects.Id " +
-                                                      "Where Subjects.Name = N'"+course+"'"))                           TestCB.Items.Add(test[0]);
+            foreach (DataRow student in MainWindow.ExecuteQuery(Query.STUDENTS_ON_COURSE(course))) StudentCB.Items.Add(student[0]);
+            foreach (DataRow test in MainWindow.ExecuteQuery(Query.TESTS_ON_COURSE(course))) TestCB.Items.Add(test[0]);
         }
     }
 }

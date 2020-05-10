@@ -84,16 +84,9 @@ namespace Courses
         private void Submit_PriceList_Click(object sender, RoutedEventArgs e)
         {
             PriceListGrid.Visibility = Visibility.Hidden;
-            string sqlCommand = "Select Organizations.Name, Subjects.Name, Courses.Duration, Prices.Price, Prices.PriceWithNDS, StartDate, EndDate From DocTeachersCourses " +
-                                "Inner Join Courses on DocTeachersCourses.Id_course = Courses.Id " +
-                                "Inner Join Subjects on Courses.Id_subject = Subjects.id " +
-                                "Inner Join DocPricesCourses on DocPricesCourses.Id_course = Courses.Id " +
-                                "Inner Join Organizations on Courses.Id_organization = Organizations.Id " +
-                                "Inner Join Prices on DocPricesCourses.Id_price = Prices.Id " +
-                                "Where DocTeachersCourses.Id_course in (Select Id From Courses Where Id_organization = " + PriceListOrgCB.SelectedIndex + ") " +
-                                "and DocTeachersCourses.StartDate<'" + PriceListDatePicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd") + 
-                                "' and DocTeachersCourses.EndDate>'" + PriceListDatePicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd") + "'";
-            DataRowCollection data = Query(sqlCommand);
+            DataRowCollection data = ExecuteQuery(Query.PRICE_LIST(PriceListOrgCB.SelectedIndex,
+                                                                   PriceListDatePicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd"),
+                                                                   PriceListDatePicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd")));
             if (data.Count == 0)
             {
                 MessageBox.Show("Не найдено", "Сообщение");
@@ -106,14 +99,9 @@ namespace Courses
         private void Submit_FindCourse_Click(object sender, RoutedEventArgs e)
         {
             FindCourseGrid.Visibility = Visibility.Hidden;
-            string sqlCommand = "Select Subjects.Name, Courses.Ammount, Requests.Ammount, DocTeachersCourses.StartDate, DocTeachersCourses.EndDate From Courses " +
-                "Right Join Requests on Courses.Id = Requests.Id_course " +
-                "Inner Join Subjects on Courses.Id_subject = Subjects.Id " +
-                "Inner Join DocTeachersCourses on Courses.Id = DocTeachersCourses.Id_course " +
-                "Where DocTeachersCourses.StartDate > '" + FindDateStartCB.SelectedDate.Value.Date.ToString("yyyy-MM-dd") +
-                "' and DocTeachersCourses.EndDate < '" + FindDateEndCB.SelectedDate.Value.Date.ToString("yyyy-MM-dd") +
-                "' and Subjects.Name = N'" + CourseCB.Text + "'";
-            DataRowCollection data = Query(sqlCommand);
+            DataRowCollection data = ExecuteQuery(Query.FIND_COURSE(FindDateStartCB.SelectedDate.Value.Date.ToString("yyyy-MM-dd"),
+                                                                    FindDateEndCB.SelectedDate.Value.Date.ToString("yyyy-MM-dd"),
+                                                                    CourseCB.Text));
             if (data.Count == 0)
             {
                 MessageBox.Show("Не найдено", "Сообщение");
@@ -126,12 +114,9 @@ namespace Courses
         private void Submit_Schedule_Click(object sender, RoutedEventArgs e)
         {
             ScheduleGrid.Visibility = Visibility.Hidden;
-            string sqlCommand = "Select Teachers.Fio, Subjects.Name, DocTeachersCourses.StartDate, DocTeachersCourses.EndDate From Teachers " +
-                "Inner Join DocTeachersCourses on DocTeachersCourses.Id_teacher = Teachers.Id " +
-                "Inner Join Courses on DocTeachersCourses.Id_course = Courses.Id " +
-                "Inner Join Subjects on Courses.Id_subject = Subjects.Id " +
-                "Where Teachers.Fio = N'" + ScheduleTeacherCB.Text + "' and DocTeachersCourses.StartDate>'" + ScheduleStartPicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd") + "' and DocTeachersCourses.EndDate<'" + ScheduleEndPicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd") + "'";
-            DataRowCollection data = Query(sqlCommand);
+            DataRowCollection data = ExecuteQuery(Query.SCHEDULE(ScheduleTeacherCB.Text,
+                                                                 ScheduleStartPicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd"),
+                                                                 ScheduleEndPicker.SelectedDate.Value.Date.ToString("yyyy-MM-dd")));
             if (data.Count == 0)
             {
                 MessageBox.Show("Не найдено", "Сообщение");
@@ -141,7 +126,7 @@ namespace Courses
         }
 
         /// <summary> SQL запрос </summary>
-        public static DataRowCollection Query(string command)
+        public static DataRowCollection ExecuteQuery(string command)
         {
             DataSet list = new DataSet("Table");
             DataTable dataTable = new DataTable();
@@ -163,21 +148,21 @@ namespace Courses
         private void LoadOrganizations()
         {
             PriceListOrgCB.Items.Clear();
-            foreach (DataRow row in Query("Select Name From Organizations")) PriceListOrgCB.Items.Add(row[0]);
+            foreach (DataRow row in ExecuteQuery(Query.ORGANIZATIONS())) PriceListOrgCB.Items.Add(row[0]);
         }
 
         /// <summary> Загрузка преподавателей из БД </summary>
         private void LoadTeachers()
         {
             ScheduleTeacherCB.Items.Clear();
-            foreach (DataRow row in Query("Select Fio From Teachers")) ScheduleTeacherCB.Items.Add(row[0]);
+            foreach (DataRow row in ExecuteQuery(Query.TEACHERS())) ScheduleTeacherCB.Items.Add(row[0]);
         }
 
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
             CourseCB.Items.Clear();
-            foreach (DataRow row in Query("Select Name From Subjects")) CourseCB.Items.Add(row[0]);
+            foreach (DataRow row in ExecuteQuery(Query.SUBJECTS())) CourseCB.Items.Add(row[0]);
         }
     }
 }
