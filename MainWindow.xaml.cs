@@ -29,15 +29,28 @@ namespace Courses
         /// <summary> Обработка нажатия на Преподаватели->Добавить </summary>
         private void AddTeacher_Click(object sender, RoutedEventArgs e)
         {
-            Window addTeacher = new AddTeacher(); // Создание окна для добавления преподавателя
-            addTeacher.Show(); // Открытие окна
+            Window addTeacher = new AddTeacher();
+            addTeacher.Show();
         }
 
         /// <summary> Обработка нажатия на Преподаватели->Назначить курс </summary>
         private void TeacherToCourse_Click(object sender, RoutedEventArgs e)
         {
-            Window addTeacherToCourse = new AddTeachersCourses(); // Создание окна для назначения преподавателя на курс
-            addTeacherToCourse.Show(); // Открытие окна
+            Window addTeacherToCourse = new AddTeachersCourses();
+            addTeacherToCourse.Show();
+        }
+
+        /// <summary> Обработка нажатия на Тестирование->Запустить </summary>
+        private void StartTest_Click(object sender, RoutedEventArgs e)
+        {
+            Window testing = new Testing();
+            testing.Show();
+        }
+
+        /// <summary> Обработка нажатия на Тестирование->Результаты </summary>
+        private void ShowResultsOfTests_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         /// <summary> Обработка нажатия на "Прайс-лист организации" </summary>
@@ -165,16 +178,6 @@ namespace Courses
         {
             CourseCB.Items.Clear();
             foreach (DataRow row in Query("Select Name From Subjects")) CourseCB.Items.Add(row[0]);
-        }
-
-        private void StartTest_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ShowResultsOfTests_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
