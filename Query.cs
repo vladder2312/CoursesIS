@@ -115,10 +115,10 @@ namespace Courses
                    IdCategory + ", N'" + Fio + "', '" + Birth + "', N'" + Gender + "', N'" + Education + "')";
         }
 
-        public static string INSERT_RESULTS(string test, int points)
+        public static string INSERT_RESULTS(string Test, int IdStudent, int Points)
         {
-            return "Insert into TestResults(Id_test, Points) Values(" +
-                MainWindow.ExecuteQuery(ID_TEST(test))[0][0]+", "+points+")";
+            return "Insert into TestResults(Id_test, Id_student, Points) Values(" +
+                MainWindow.ExecuteQuery(ID_TEST(Test))[0][0]+", "+IdStudent+", "+Points+")";
         }
 
         public static string ID_TEST(string name)
@@ -129,11 +129,9 @@ namespace Courses
         public static string TEST_RESULTS()
         {
             return "Select Students.Fio, Subjects.Name, Tests.Name, TestResults.Points From Students " +
-                   "Inner Join Requests on Students.Id_request = Requests.Id " +
-                   "Inner Join Courses on Requests.Id_course = Courses.Id " +
-                   "Inner Join Subjects on Courses.Id_subject = Subjects.Id " +
-                   "Inner Join Tests on Subjects.Id = Tests.Id_subject " +
-                   "Inner Join TestResults on Tests.Id = TestResults.Id_test";
+                   "Inner Join TestResults on Students.Id = TestResults.Id_student " +
+                   "Inner Join Tests on TestResults.Id_test = Tests.Id " +
+                   "Inner Join Subjects on Tests.Id_subject = Subjects.Id";
         }
     }
 }
