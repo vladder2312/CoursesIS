@@ -28,13 +28,13 @@ namespace Courses
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
-            foreach (DataRow course in MainWindow.ExecuteQuery(Query.SUBJECTS())) CourseCB.Items.Add(course[0]);
+            foreach (DataRow course in Query.Execute(Query.SUBJECTS())) CourseCB.Items.Add(course[0]);
         }
 
         /// <summary> Загрузка учителей из БД </summary>
         private void LoadTeachers()
         {
-            foreach (DataRow teacher in MainWindow.ExecuteQuery(Query.TEACHERS())) TeacherCB.Items.Add(teacher[0]);
+            foreach (DataRow teacher in Query.Execute(Query.TEACHERS())) TeacherCB.Items.Add(teacher[0]);
         }
 
         /// <summary> Обработка нажатия на "Добавить" </summary>
@@ -58,7 +58,7 @@ namespace Courses
             OutputLabel.Content = "";
             try
             {
-                MainWindow.ExecuteQuery(Query.INSERT_TEACHERS_COURSES(TeacherCB.SelectedIndex, CourseCB.SelectedIndex, start, end));
+                Query.Execute(Query.INSERT_TEACHERS_COURSES(TeacherCB.SelectedIndex, CourseCB.SelectedIndex, start, end));
             }
             catch (Exception)
             {

@@ -78,6 +78,7 @@
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\TestResults.cs" />
     <Compile Include="Query.cs" />
     <Compile Include="Testing.xaml.cs">
       <DependentUpon>Testing.xaml</DependentUpon>

@@ -48,13 +48,13 @@ namespace Courses
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
-            foreach (DataRow subject in MainWindow.ExecuteQuery(Query.SUBJECTS())) CourseCB.Items.Add(subject[0]);
+            foreach (DataRow subject in Query.Execute(Query.SUBJECTS())) CourseCB.Items.Add(subject[0]);
         }
 
         /// <summary> Загрузка выбранного теста </summary>
         private void LoadTest()
         {
-            foreach (DataRow question in MainWindow.ExecuteQuery(Query.TEST(TestCB.Text)))
+            foreach (DataRow question in Query.Execute(Query.TEST(TestCB.Text)))
                 Questions.Add(Question.Transform(question));
         }
 
@@ -65,8 +65,8 @@ namespace Courses
             TestCB.Items.Clear();
             StudentCB.Items.Clear();
 
-            foreach (DataRow student in MainWindow.ExecuteQuery(Query.STUDENTS_ON_COURSE(course))) StudentCB.Items.Add(student[0]);
-            foreach (DataRow test in MainWindow.ExecuteQuery(Query.TESTS_ON_COURSE(course))) TestCB.Items.Add(test[0]);
+            foreach (DataRow student in Query.Execute(Query.STUDENTS_ON_COURSE(course))) StudentCB.Items.Add(student[0]);
+            foreach (DataRow test in Query.Execute(Query.TESTS_ON_COURSE(course))) TestCB.Items.Add(test[0]);
         }
 
         /// <summary> Изменение размера окна </summary>
@@ -156,7 +156,7 @@ namespace Courses
         /// <summary> Сохранение результатов теста в БД </summary>
         private void SaveResults()
         {
-
+            Query.Execute(Query.INSERT_RESULTS(TestCB.Text, StudentCB.SelectedIndex, Convert.ToInt32(Answers.Average())));
         }
 
         /// <summary> Обработка нажатия на "Закрыть" </summary>

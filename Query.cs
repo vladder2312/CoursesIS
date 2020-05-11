@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,9 @@ namespace Courses
 {
     class Query
     {
+        /// <summary> Подключение к базе данных </summary>
+        public static SqlConnection sqlConnection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True");
+
         public static string TEACHERS()
         {
             return "Select Fio From Teachers";
@@ -113,6 +118,44 @@ namespace Courses
         {
             return "Insert into Teachers(Id_category, Fio, BirthDate, Gender, Education) Values(" +
                    IdCategory + ", N'" + Fio + "', '" + Birth + "', N'" + Gender + "', N'" + Education + "')";
+        }
+
+        public static string INSERT_RESULTS(string Test, int IdStudent, int Points)
+        {
+            return "Insert into TestResults(Id_test, Id_student, Points) Values(" +
+                Execute(ID_TEST(Test))[0][0]+", "+IdStudent+", "+Points+")";
+        }
+
+        public static string ID_TEST(string name)
+        {
+            return "Select Id From Tests Where Name = N'" + name + "'";
+        }
+
+        public static string TEST_RESULTS()
+        {
+            return "Select Students.Fio, Subjects.Name, Tests.Name, TestResults.Points From Students " +
+                   "Inner Join TestResults on Students.Id = TestResults.Id_student " +
+                   "Inner Join Tests on TestResults.Id_test = Tests.Id " +
+                   "Inner Join Subjects on Tests.Id_subject = Subjects.Id";
+        }
+
+        /// <summary> SQL запрос </summary>
+        public static DataRowCollection Execute(string command)
+        {
+            DataSet list = new DataSet("Table");
+            DataTable dataTable = new DataTable();
+            if (command.ToLower().Contains("select"))
+            {
+                SqlDataAdapter adapter = new SqlDataAdapter(command, sqlConnection);
+                adapter.Fill(list, "Table");
+                dataTable = list.Tables["Table"];
+            }
+            if (command.ToLower().Contains("insert"))
+            {
+                SqlCommand cmd = new SqlCommand(command, sqlConnection);
+                cmd.ExecuteNonQuery();
+            }
+            return dataTable.Rows;
         }
     }
 }
