@@ -6,7 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:local="clr-namespace:Courses"
         mc:Ignorable="d"
-        Title="AddCourse" Height="373" Width="310" MinWidth="310" MinHeight="340">
+        Title="Добавление курса" Height="373" Width="310" MinWidth="310" MinHeight="340">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

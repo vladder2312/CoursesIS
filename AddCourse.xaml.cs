@@ -14,16 +14,16 @@ namespace Courses
         {
             InitializeComponent();
 
-            DataRowCollection data = MainWindow.ExecuteQuery(Query.ORGANIZATIONS()); //Загрузка организаций
+            DataRowCollection data = Query.Execute(Query.ORGANIZATIONS()); //Загрузка организаций
             foreach (DataRow cat in data) OrgPicker.Items.Add(cat.ItemArray[0]);
 
-            data = MainWindow.ExecuteQuery(Query.TEACHERS()); //Загрузка преподавателей
+            data = Query.Execute(Query.TEACHERS()); //Загрузка преподавателей
             foreach (DataRow teacher in data) TeachPicker.Items.Add(teacher.ItemArray[0]);
 
-            data = MainWindow.ExecuteQuery(Query.PRICES()); //Загрузка цен
+            data = Query.Execute(Query.PRICES()); //Загрузка цен
             foreach (DataRow price in data) PriceCB.Items.Add(price.ItemArray[0]);
 
-            data = MainWindow.ExecuteQuery(Query.SUBJECTS()); //Загрузка предметов
+            data = Query.Execute(Query.SUBJECTS()); //Загрузка предметов
             foreach (DataRow subject in data) SubjectCB.Items.Add(subject.ItemArray[0]);
         }
 
@@ -46,11 +46,11 @@ namespace Courses
             errMessage.Content = "";
             try
             {
-                DataRowCollection data = MainWindow.ExecuteQuery("Select Max(Id) From Courses"); //Получение максимального ID в таблице
+                DataRowCollection data = Query.Execute("Select Max(Id) From Courses"); //Получение максимального ID в таблице
                 id = Convert.ToInt32(data[0].ItemArray[0]) + 1; //Добавление к ID единицы, это ID будущей записи
-                MainWindow.ExecuteQuery(Query.INSERT_COURSES(id, OrgPicker.SelectedIndex, SubjectCB.SelectedIndex, DaysTB.Text, AmmountTB.Text)); //Добавление записи в Courses
-                MainWindow.ExecuteQuery(Query.INSERT_PRICES_COURSES(PriceCB.SelectedIndex, id, start)); //Добавление записи в DocPricesCourses
-                MainWindow.ExecuteQuery(Query.INSERT_TEACHERS_COURSES(TeachPicker.SelectedIndex, id, start, end)); //Добавление записи в DocTeachersCourses
+                Query.Execute(Query.INSERT_COURSES(id, OrgPicker.SelectedIndex, SubjectCB.SelectedIndex, DaysTB.Text, AmmountTB.Text)); //Добавление записи в Courses
+                Query.Execute(Query.INSERT_PRICES_COURSES(PriceCB.SelectedIndex, id, start)); //Добавление записи в DocPricesCourses
+                Query.Execute(Query.INSERT_TEACHERS_COURSES(TeachPicker.SelectedIndex, id, start, end)); //Добавление записи в DocTeachersCourses
             }
             catch (Exception ex)
             {

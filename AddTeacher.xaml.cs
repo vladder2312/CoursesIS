@@ -20,7 +20,7 @@ namespace Courses
         /// <summary> Загрузка категорий преподавателей из БД </summary>
         private void LoadCategories()
         {
-            foreach (DataRow category in MainWindow.ExecuteQuery(Query.CATEGORIES())) CategoryCB.Items.Add(category[0].ToString());
+            foreach (DataRow category in Query.Execute(Query.CATEGORIES())) CategoryCB.Items.Add(category[0].ToString());
         }
 
         /// <summary> Обработка нажатия на "Добавить" </summary>
@@ -42,7 +42,7 @@ namespace Courses
             }
             try
             {
-                MainWindow.ExecuteQuery(Query.INSERT_TEACHERS(categoryId, fio, birth, gender, education));
+                Query.Execute(Query.INSERT_TEACHERS(categoryId, fio, birth, gender, education));
             } catch (Exception)
             {
                 OutputLabel.Content = "Ошибка при добавлении";
