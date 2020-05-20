@@ -35,6 +35,13 @@ namespace Courses
             addTeacherToCourse.Show();
         }
 
+        /// <summary> Обработка нажатия на Тестирование->Создать </summary>
+        private void CreateTest_Click(object sender, RoutedEventArgs e)
+        {
+            Window addTest = new AddTest();
+            addTest.Show();
+        }
+
         /// <summary> Обработка нажатия на Тестирование->Запустить </summary>
         private void StartTest_Click(object sender, RoutedEventArgs e)
         {
@@ -140,5 +147,6 @@ namespace Courses
             CourseCB.Items.Clear();
             foreach (DataRow row in Query.Execute(Query.SUBJECTS())) CourseCB.Items.Add(row[0]);
         }
+
     }
 }

@@ -28,6 +28,7 @@
                 <MenuItem Header="Назначить на курс" Click="TeacherToCourse_Click"/>
             </MenuItem>
             <MenuItem Header="Тестирование">
+                <MenuItem Header="Создать" Click="CreateTest_Click"/>
                 <MenuItem Header="Запустить" Click="StartTest_Click"/>
                 <MenuItem Header="Результаты" Click="ShowResultsOfTests_Click"/>
             </MenuItem>
