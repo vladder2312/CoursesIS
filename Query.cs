@@ -126,6 +126,10 @@ namespace Courses
                 Execute(ID_TEST(Test))[0][0]+", "+IdStudent+", "+Points+")";
         }
 
+        public static string INSERT_TEST()
+        {
+            return "";
+        }
         public static string ID_TEST(string name)
         {
             return "Select Id From Tests Where Name = N'" + name + "'";
