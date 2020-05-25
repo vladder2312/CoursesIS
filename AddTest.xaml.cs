@@ -1,17 +1,9 @@
 ﻿using Courses.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Courses
 {
@@ -24,6 +16,7 @@ namespace Courses
         public AddTest()
         {
             InitializeComponent();
+            LoadSubjects();
         }
 
         /// <summary> Обработка нажатия на "Очистить" </summary>
@@ -61,7 +54,24 @@ namespace Courses
         /// <summary> Обработка нажатия на "Готово" </summary>
         private void Done_Click(object sender, RoutedEventArgs e)
         {
-            Query.INSERT_TEST();
+            string name = TestNameTB.Text;
+            int subject = SubjectCB.SelectedIndex, testId;
+            if (!name.Equals("") && subject!=-1 && questions.Count!=0)
+            {
+                Query.Execute(Query.INSERT_TEST(subject, name));
+                DataRowCollection drc = Query.Execute(Query.ID_TEST(name));
+                testId = Convert.ToInt32(Query.Execute(Query.ID_TEST(name))[0][0]);
+                foreach(Question question in questions)
+                {
+                    Query.Execute(Query.INSERT_QUESTION(testId,
+                                                        question.Вопрос,
+                                                        question.ПравильныйОтвет,
+                                                        question.Вариант1,
+                                                        question.Вариант2,
+                                                        question.Вариант3,
+                                                        question.Вариант4));
+                } 
+            }
         }
 
         /// <summary> Обработка нажатия на номер вопроса </summary>
@@ -94,6 +104,11 @@ namespace Courses
                 questions[selected].Вариант4 = Variant4.Text;
                 questions[selected].ПравильныйОтвет = Convert.ToInt32(TrueVariant.Text);
             }
+        }
+
+        private void LoadSubjects()
+        {
+            foreach (DataRow row in Query.Execute(Query.SUBJECTS())) SubjectCB.Items.Add(row[0]);
         }
     }
 }

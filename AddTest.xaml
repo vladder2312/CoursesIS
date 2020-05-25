@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Courses"
         mc:Ignorable="d"
-        Title="Создание теста" Height="351" Width="500">
+        Title="Создание теста" Height="414" Width="500">
     <Grid>
-        <Menu Name="TopMenu" Height="25" VerticalAlignment="Top">
+        <Grid Margin="0,0,0,313">
+            <Label    VerticalAlignment="Top" HorizontalAlignment="Left" Content="Предмет" Margin="5,5,0,0"/>
+            <ComboBox VerticalAlignment="Top" HorizontalAlignment="Left" Margin="104,9,0,0"  Width="373" Name="SubjectCB"/>
+            <Label    VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,33,0,0" Content="Название теста" />
+            <TextBox  VerticalAlignment="Top" HorizontalAlignment="Left" Margin="104,36,0,0" Width="373" Height="23" TextWrapping="Wrap" Name="TestNameTB"/>
+        </Grid>
+        <Menu Name="TopMenu" Height="25" VerticalAlignment="Top" Margin="0,70,0,0">
             <MenuItem Header="1" Click="MenuItem_Click"/>
         </Menu>
-        <TextBox VerticalAlignment="Top" Height="85"  Margin="10,30,10,0" AcceptsReturn="True" TextWrapping="Wrap" Text="Вопрос" Name="QuestionText"/>
-        <Border  VerticalAlignment="Top" Height="140" Margin="10,120,10,0" BorderBrush="Black" BorderThickness="1">
+        <TextBox VerticalAlignment="Top" Height="85"  Margin="10,100,10,0" AcceptsReturn="True" TextWrapping="Wrap" Text="Вопрос" Name="QuestionText"/>
+        <Border  VerticalAlignment="Top" Height="140" Margin="10,190,10,0" BorderBrush="Black" BorderThickness="1">
             <Grid>
                 <TextBox Text="Вариант 1" Margin="2,10,0,0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="30" Width="230" Name="Variant1"/>
                 <TextBox Text="Вариант 2" Margin="2,60,0,0"  HorizontalAlignment="Left"  VerticalAlignment="Top" Height="30" Width="230" Name="Variant2"/>
@@ -21,7 +27,7 @@
                 <TextBox TextAlignment="Center" Margin="0,0,192,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30" Width="40" Name="TrueVariant"/>
             </Grid>
         </Border>
-        <Grid Margin="10,280,10,10">
+        <Grid Margin="10,343,10,10">
             <Button HorizontalAlignment="Left"  Width="100" Content="Очистить"  Click="Clear_Click"/>
             <Button HorizontalAlignment="Left"  Width="100" Content="Сохранить" Click="Save_Click" Margin="125,0,0,0"/>
             <Button HorizontalAlignment="Right" Width="100" Content="Добавить"  Click="Add_Click"  Margin="0,0,125,0"/>
