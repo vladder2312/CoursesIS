@@ -123,12 +123,24 @@ namespace Courses
         public static string INSERT_RESULTS(string Test, int IdStudent, int Points)
         {
             return "Insert into TestResults(Id_test, Id_student, Points) Values(" +
-                Execute(ID_TEST(Test))[0][0]+", "+IdStudent+", "+Points+")";
+                   Execute(ID_TEST(Test))[0][0]+", "+IdStudent+", "+Points+")";
+        }
+
+        public static string INSERT_TEST(int Id_subject, string name)
+        {
+            return "Insert into Tests(Id_subject, Name) Values(" +
+                   Id_subject + ", N'"+ name + "')";
+        }
+
+        public static string INSERT_QUESTION(int Id_test, string Title, int Answer, string Variant1, string Variant2, string Variant3, string Variant4)
+        {
+            return "Insert into Questions(Id_test, Title, Answer, Variant1, Variant2, Variant3, Variant4) Values(" +
+                   Id_test + ", N'"+ Title +"', N'"+ Answer +"', N'"+ Variant1 + "', N'"+ Variant2 + "', N'"+ Variant3 + "', N'"+ Variant4 + "')";
         }
 
         public static string ID_TEST(string name)
         {
-            return "Select Id From Tests Where Name = N'" + name + "'";
+            return "Select Id From Tests Where Name Like N'" + name + "'";
         }
 
         public static string TEST_RESULTS()
