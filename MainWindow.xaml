@@ -7,17 +7,6 @@
         mc:Ignorable="d"
         Title="Курсы" Height="650" Width="1000" MinWidth="1000" MinHeight="620" Background="#FFDEDEDE" HorizontalAlignment="Left" VerticalAlignment="Top" ResizeMode="NoResize">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="205*"/>
-            <ColumnDefinition Width="292*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="288*"/>
-            <RowDefinition Height="277*"/>
-            <RowDefinition Height="26*"/>
-        </Grid.RowDefinitions>
-
         <DataGrid Margin="0,25,0,0" AutoGenerateColumns="True" Background="White" Grid.RowSpan="2" Grid.ColumnSpan="3" Name="Table" Height="521" VerticalAlignment="Top"/>
         <Menu Height="25" VerticalAlignment="Top" Background="White" Grid.ColumnSpan="3">
             <MenuItem Header="Курсы">
@@ -33,13 +22,107 @@
                 <MenuItem Header="Результаты" Click="ShowResultsOfTests_Click"/>
             </MenuItem>
         </Menu>
-        <Menu HorizontalAlignment="Left" Height="3" Margin="6,-3,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
-        <Button Content="Прайс-лист организации" Margin="10,0,0,10" Height="30" VerticalAlignment="Bottom"
-                Click="PriceList_Click" HorizontalAlignment="Left" Width="170" Grid.RowSpan="2" Background="White" Grid.Row="1" Grid.Column="1" />
-        <Button Content="Расписание преподавателя" Margin="352,0,0,10" Height="30" VerticalAlignment="Bottom"
-                Click="TeacherSchedule_Click" Grid.RowSpan="2" Background="White" Grid.Row="1" HorizontalAlignment="Left" Width="162" Grid.Column="1" RenderTransformOrigin="-0.185,0.767" Grid.ColumnSpan="2" />
-        <Button Content="Найти курс" Margin="185,0,0,10" Height="30" VerticalAlignment="Bottom"
-                Click="FindCourse_Click" Grid.RowSpan="2" Background="White" Grid.Row="1" HorizontalAlignment="Left" Width="162" Grid.Column="1" />
+        <Menu HorizontalAlignment="Left" Height="3" Margin="6,0,0,0" VerticalAlignment="Top" Width="0" Grid.Column="1"/>
+        <Button Content="Прайс-лист организации" Margin="221,0,0,10" Name="PriceList_Button"
+                Click="PriceList_Click" HorizontalAlignment="Left" Width="170" Background="White" Height="30" VerticalAlignment="Bottom">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="Gray"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="FindCourse_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="TeacherSchedule_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ThicknessAnimation To = "221,0,0,20" Duration="0:0:1"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "416,0,416,10" Duration="0:0:1"
+                                Storyboard.TargetName="FindCourse_Button"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "0,0,229,10" Duration="0:0:1"
+                                Storyboard.TargetName="TeacherSchedule_Button"
+                                Storyboard.TargetProperty="Margin" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Button Content="Найти курс" Margin="416,0,416,10" Height="30" VerticalAlignment="Bottom" Name="FindCourse_Button"
+                Click="FindCourse_Click" Background="White">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="Gray"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="PriceList_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="TeacherSchedule_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ThicknessAnimation To = "416,0,416,20" Duration="0:0:1"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "221,0,0,10" Duration="0:0:1"
+                                Storyboard.TargetName="PriceList_Button"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "0,0,229,10" Duration="0:0:1"
+                                Storyboard.TargetName="TeacherSchedule_Button"
+                                Storyboard.TargetProperty="Margin" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Button Content="Расписание преподавателя" Margin="0,0,229,10" Height="30" VerticalAlignment="Bottom" Name="TeacherSchedule_Button"
+                Click="TeacherSchedule_Click" Background="White" HorizontalAlignment="Right" Width="162" RenderTransformOrigin="-0.185,0.767">
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="Gray"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="FindCourse_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                          Storyboard.TargetName="PriceList_Button">
+                                <LinearColorKeyFrame KeyTime="0:0:0:50" Value="LightGray"/>
+                                <LinearColorKeyFrame KeyTime="0:0:1" Value="White"/>
+                            </ColorAnimationUsingKeyFrames>
+                            <ThicknessAnimation To = "0,0,229,20" Duration="0:0:1"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "221,0,0,10" Duration="0:0:1"
+                                Storyboard.TargetName="PriceList_Button"
+                                Storyboard.TargetProperty="Margin"/>
+                            <ThicknessAnimation To = "416,0,416,10" Duration="0:0:1"
+                                Storyboard.TargetName="FindCourse_Button"
+                                Storyboard.TargetProperty="Margin" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+
 
         <Grid Visibility="Hidden" Grid.ColumnSpan="2" Margin="369,228,368,210" Grid.Column="1" Grid.RowSpan="2" Name="PriceListGrid" Background="LightGray">
             <DatePicker Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="220" Name="PriceListDatePicker" />
