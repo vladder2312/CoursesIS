@@ -95,14 +95,33 @@ namespace Courses
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
+            string question = QuestionText.Text, variant1 = Variant1.Text, variant2 = Variant2.Text,
+                variant3 = Variant3.Text, variant4 = Variant4.Text;
+            int trueVariant = Convert.ToInt32(TrueVariant.Text);
             if (selected < questions.Count)
             {
-                questions[selected].Вопрос = QuestionText.Text;
-                questions[selected].Вариант1 = Variant1.Text;
-                questions[selected].Вариант2 = Variant2.Text;
-                questions[selected].Вариант3 = Variant3.Text;
-                questions[selected].Вариант4 = Variant4.Text;
-                questions[selected].ПравильныйОтвет = Convert.ToInt32(TrueVariant.Text);
+                if(!question.Trim().Equals("") && !variant1.Trim().Equals("") && !variant2.Trim().Equals("") &&
+                    !variant3.Trim().Equals("") && !variant4.Trim().Equals(""))
+                {
+                    try
+                    {
+                        trueVariant = Convert.ToInt32(TrueVariant.Text);
+                    } catch (Exception)
+                    {
+                        MessageBox.Show("Неверный ввод правильного ответа");
+                        return;
+                    }
+                } else
+                {
+                    MessageBox.Show("Заполните все поля");
+                    return;
+                }
+                questions[selected].Вопрос = question;
+                questions[selected].Вариант1 = variant1;
+                questions[selected].Вариант2 = variant2;
+                questions[selected].Вариант3 = variant3;
+                questions[selected].Вариант4 = variant4;
+                questions[selected].ПравильныйОтвет = trueVariant;
             }
         }
 
