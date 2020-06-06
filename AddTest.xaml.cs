@@ -93,11 +93,12 @@ namespace Courses
             }
         }
 
+        /// <summary> Обработка нажатия на "Сохранить" </summary>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             string question = QuestionText.Text, variant1 = Variant1.Text, variant2 = Variant2.Text,
                 variant3 = Variant3.Text, variant4 = Variant4.Text;
-            int trueVariant = Convert.ToInt32(TrueVariant.Text);
+            int trueVariant;
             if (selected < questions.Count)
             {
                 if(!question.Trim().Equals("") && !variant1.Trim().Equals("") && !variant2.Trim().Equals("") &&
@@ -125,6 +126,7 @@ namespace Courses
             }
         }
 
+        /// <summary> Загрузка предметов из БД </summary>
         private void LoadSubjects()
         {
             foreach (DataRow row in Query.Execute(Query.SUBJECTS())) SubjectCB.Items.Add(row[0]);

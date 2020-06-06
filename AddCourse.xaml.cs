@@ -36,7 +36,7 @@ namespace Courses
             {
                 startdate = DatePicker.SelectedDate.Value.Date;
                 start = startdate.ToString("yyyy-MM-dd"); //Приведение даты начала к строке
-                startdate = startdate.AddDays(Convert.ToDouble(AmmountTB.Text)); //Добавление дней к начальной дате
+                startdate = startdate.AddDays(Convert.ToDouble(DaysTB.Text)); //Добавление дней к начальной дате
                 end = startdate.ToString("yyyy-MM-dd");  //Преобразование даты к строке
             } catch (Exception)
             {

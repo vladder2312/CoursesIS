@@ -1,17 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Courses
 {
@@ -28,7 +17,8 @@ namespace Courses
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
-            foreach (DataRow course in Query.Execute(Query.SUBJECTS())) CourseCB.Items.Add(course[0]);
+
+            foreach (DataRow course in Query.Execute(Query.COURSES())) CourseCB.Items.Add(course[0]+" "+course[1]);
         }
 
         /// <summary> Загрузка учителей из БД </summary>
@@ -46,7 +36,7 @@ namespace Courses
             try
             {
                 startDate = StartPicker.SelectedDate.Value.Date;
-                start = startDate.ToString();
+                start = startDate.ToString("yyyy-MM-dd");
                 startDate = startDate.AddDays(Convert.ToDouble(DaysTB.Text));
                 end = startDate.ToString("yyyy-MM-dd");
             }

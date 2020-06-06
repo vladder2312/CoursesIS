@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Courses
 {
@@ -38,6 +33,13 @@ namespace Courses
             return "Select Price From Prices";
         }
 
+        public static string COURSES()
+        {
+            return "Select Organizations.Name, Subjects.Name From Courses " +
+                "Inner Join Organizations on Courses.Id_organization = Organizations.Id " +
+                "Inner Join Subjects on Courses.Id_subject = Subjects.Id";
+        }
+
         public static string PRICE_LIST(int OrganizationId, string StartDate, string EndDate)
         {
             return "Select Organizations.Name, Subjects.Name, Courses.Duration, Prices.Price, Prices.PriceWithNDS, StartDate, EndDate From DocTeachersCourses " +
@@ -54,8 +56,8 @@ namespace Courses
         public static string FIND_COURSE(string StartDate, string EndDate, string Subject)
         {
             return "Select Subjects.Name, Courses.Ammount, Requests.Ammount, DocTeachersCourses.StartDate, DocTeachersCourses.EndDate From Courses " +
-                   "Right Join Requests on Courses.Id = Requests.Id_course " +
-                   "Inner Join Subjects on Courses.Id_subject = Subjects.Id " +
+                   "Left Join Requests on Courses.Id = Requests.Id_course " +
+                   "Right Join Subjects on Courses.Id_subject = Subjects.Id " +
                    "Inner Join DocTeachersCourses on Courses.Id = DocTeachersCourses.Id_course " +
                    "Where DocTeachersCourses.StartDate > '" + StartDate +
                    "' and DocTeachersCourses.EndDate < '" + EndDate +

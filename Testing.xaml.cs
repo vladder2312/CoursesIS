@@ -48,7 +48,7 @@ namespace Courses
         /// <summary> Загрузка курсов из БД </summary>
         private void LoadCourses()
         {
-            foreach (DataRow subject in Query.Execute(Query.SUBJECTS())) CourseCB.Items.Add(subject[0]);
+            foreach (DataRow course in Query.Execute(Query.COURSES())) CourseCB.Items.Add(course[0]+" "+course[1]);
         }
 
         /// <summary> Загрузка выбранного теста </summary>

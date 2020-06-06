@@ -1,6 +1,5 @@
 ﻿using Courses.Models;
 using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 
 namespace Courses
@@ -82,7 +81,7 @@ namespace Courses
             LoadCourses();
         }
 
-        /// <summary> Обработка нажатия на "Найти курс" </summary>
+        /// <summary> Обработка нажатия на "Прайс-лист -> Выбрать" </summary>
         private void Submit_PriceList_Click(object sender, RoutedEventArgs e)
         {
             PriceListGrid.Visibility = Visibility.Hidden;
@@ -97,7 +96,7 @@ namespace Courses
             Table.ItemsSource = PriceList.Transform(data);
         }
 
-        /// <summary> Обработка нажатия на "Найти курс" </summary>
+        /// <summary> Обработка нажатия на "Найти курс -> Выбрать" </summary>
         private void Submit_FindCourse_Click(object sender, RoutedEventArgs e)
         {
             FindCourseGrid.Visibility = Visibility.Hidden;
@@ -112,7 +111,7 @@ namespace Courses
             Table.ItemsSource = Course.Transform(data);
         }
 
-        /// <summary> Обработка нажатия на "Найти курс" </summary>
+        /// <summary> Обработка нажатия на "Расписание -> Выбрать" </summary>
         private void Submit_Schedule_Click(object sender, RoutedEventArgs e)
         {
             ScheduleGrid.Visibility = Visibility.Hidden;
