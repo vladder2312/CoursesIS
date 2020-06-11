@@ -28,7 +28,7 @@ namespace Courses
             var result = new List<Schedule>();
             foreach(DataRow row in data)
             {
-                result.Add(new Schedule(row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString()));
+                result.Add(new Schedule(row[0].ToString(), row[1].ToString(), DateTime.Parse(row[2].ToString()).ToShortDateString(), DateTime.Parse(row[3].ToString()).ToShortDateString()));
             }
             return result;
         }

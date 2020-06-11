@@ -21,7 +21,7 @@ namespace Courses
             foreach (DataRow teacher in data) TeachPicker.Items.Add(teacher.ItemArray[0]);
 
             data = Query.Execute(Query.PRICES()); //Загрузка цен
-            foreach (DataRow price in data) PriceCB.Items.Add(price.ItemArray[0]);
+            foreach (DataRow price in data) PriceCB.Items.Add(Math.Round(Convert.ToDouble(price.ItemArray[0]), 2) + " руб.");
 
             data = Query.Execute(Query.SUBJECTS()); //Загрузка предметов
             foreach (DataRow subject in data) SubjectCB.Items.Add(subject.ItemArray[0]);

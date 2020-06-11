@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Courses.Models;
+using System;
 using System.Data;
 using System.Windows;
 
@@ -32,6 +33,7 @@ namespace Courses
         {
             DateTime startDate;
             string start, end;
+            string duration;
 
             try
             {
@@ -39,6 +41,7 @@ namespace Courses
                 start = startDate.ToString("yyyy-MM-dd");
                 startDate = startDate.AddDays(Convert.ToDouble(DaysTB.Text));
                 end = startDate.ToString("yyyy-MM-dd");
+                duration = Convert.ToInt32(DaysTB.Text).ToString();
             }
             catch (Exception)
             {
@@ -49,6 +52,7 @@ namespace Courses
             try
             {
                 Query.Execute(Query.INSERT_TEACHERS_COURSES(TeacherCB.SelectedIndex, CourseCB.SelectedIndex, start, end));
+                Query.Execute(Query.UPDATE_COURSES_DURATION(CourseCB.SelectedIndex, duration));
             }
             catch (Exception)
             {

@@ -116,6 +116,10 @@ namespace Courses
                    IdTeacher + ", " + IdCourse + ", '" + StartDate + "', '" + EndDate + "')";
         }
 
+        public static string UPDATE_COURSES_DURATION(int IdCourse, string Duration) {
+            return "Update Courses Set Duration = "+Duration+" Where Id = "+IdCourse;
+        }
+
         public static string INSERT_TEACHERS(int IdCategory, string Fio, string Birth, string Gender, string Education)
         {
             return "Insert into Teachers(Id_category, Fio, BirthDate, Gender, Education) Values(" +
@@ -164,7 +168,7 @@ namespace Courses
                 adapter.Fill(list, "Table");
                 dataTable = list.Tables["Table"];
             }
-            if (command.ToLower().Contains("insert"))
+            if (command.ToLower().Contains("insert") || command.ToLower().Contains("update"))
             {
                 SqlCommand cmd = new SqlCommand(command, sqlConnection);
                 cmd.ExecuteNonQuery();
